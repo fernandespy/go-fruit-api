@@ -41,6 +41,7 @@ Parte 2: Relatório de Açúcar
 - Frutas com açúcar < 10 são consideradas low_sugar
 
 
+
 ---
 
 ### Como rodar o projeto localmente
@@ -117,6 +118,117 @@ Resposta exemplo:
   "total_low_sugar": 1
 }
 ```
+
+*GET /api/fruits/*
+
+Retorna todas as frutas existentes no db
+
+Resposta exemplo
+
+```json
+{
+    "Fruits": [
+        {
+            "ID": 2, //ID único gerado pelo proprio DB
+            "CreatedAt": "2025-04-24T14:52:12.0811751-03:00",
+            "UpdatedAt": "2025-04-24T14:52:12.0811751-03:00",
+            "DeletedAt": null,
+            "id": 3, // ID respectivo da fruta disponivel na API, e ID usado nas rotas get e delete
+            "name": "Strawberry",
+            "family": "Rosaceae",
+            "genus": "Fragaria",
+            "order": "Rosales",
+            "carbohydrates": 5.5,
+            "protein": 0.8,
+            "fat": 0.4,
+            "calories": 29,
+            "sugar": 5.4
+        },
+        {
+            "ID": 4, //ID único gerado pelo proprio DB
+            "CreatedAt": "2025-04-24T14:52:12.0982658-03:00",
+            "UpdatedAt": "2025-04-24T14:52:12.0982658-03:00",
+            "DeletedAt": null,
+            "id": 5, // ID respectivo da fruta disponivel na API, e ID usado nas rotas get e delete
+            "name": "Tomato",
+            "family": "Solanaceae",
+            "genus": "Solanum",
+            "order": "Solanales",
+            "carbohydrates": 3.9,
+            "protein": 0.9,
+            "fat": 0.2,
+            "calories": 74,
+            "sugar": 2.6
+        },
+```
+
+*GET /api/fruits/:fruit_id*
+> exemplo: [http:](http://localhost:8080/api/fruits/52)
+
+Retorna a fruta que possui o respectivo ID, mas primeira checa se a fruta teve alguma deleção aplicada pelo campo deleted_at no DB, se não retorna a mesma
+
+Retorno da fruta exemplo:
+
+```json
+{
+    "Fruit": {
+        "ID": 2,
+        "CreatedAt": "2025-04-24T14:52:12.0811751-03:00",
+        "UpdatedAt": "2025-04-24T14:52:12.0811751-03:00",
+        "DeletedAt": null,
+        "id": 3,
+        "name": "Strawberry",
+        "family": "Rosaceae",
+        "genus": "Fragaria",
+        "order": "Rosales",
+        "carbohydrates": 5.5,
+        "protein": 0.8,
+        "fat": 0.4,
+        "calories": 29,
+        "sugar": 5.4
+    }
+}
+```
+
+Retorno caso a fruta seja deletada:
+
+```json
+{
+    "Fruit was deleted_at": "2025-04-24T15:05:44.696144-03:00"
+}
+```
+*GET /api/fruits/delete/:fruit_id*
+> exemplo: [http:](http://localhost:8080/api/fruits/delete/52)
+
+Realiza a deleção da fruta especificada direto no DB
+
+Retorno esperado:
+
+```json
+{
+    "message": "Fruit deleted successfully"
+}
+```
+
+Possivel resposta:
+
+```json
+{
+    "error": "Fruit not found"
+}
+```
+
+Ou:
+
+```json
+{
+    "Fruit already deleted:": "2025-04-24T15:34:47.8652213-03:00"
+}
+```
+
+*Observação:*
+
+Não criei um method de POST, pois como pegamos os dados da API, adicionar frutas próprias seria desnecessário. 
 
 ---
 

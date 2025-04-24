@@ -17,7 +17,7 @@ func ReportSugar(c *gin.Context) {
 	lowSugar := []gin.H{}
 
 	for _, f := range fruits {
-		item := gin.H{"id": f.ID, "name": f.Name}
+		item := gin.H{"fruit_id": f.ID, "name": f.Name}
 		if f.Sugar >= 10 {
 			highSugar = append(highSugar, item)
 		} else {
@@ -40,4 +40,62 @@ func LoadFruits(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "Fruits loaded successfuly"})
+}
+
+func GetFruits(c *gin.Context) {
+	var fruits []models.Fruit
+	if err := database.DB.Find(&fruits).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "ERROR getting fruits"})
+		return
+	}
+
+	if len(fruits) == 0 {
+		c.JSON(http.StatusOK, gin.H{"message": "Fruits empty"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"Fruits": fruits,
+	})
+}
+
+func GetFruitsByID(c *gin.Context) {
+	fruitID := c.Param("fruit_id")
+	var fruit models.Fruit
+
+	if err := database.DB.Unscoped().Where("fruit_id = ?", fruitID).First(&fruit).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Fruit not found"})
+		return
+	}
+
+	if fruit.DeletedAt.Valid {
+		c.JSON(http.StatusOK, gin.H{"Fruit was deleted_at": fruit.DeletedAt})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"Fruit": fruit,
+	})
+}
+
+func DeleteFruitByID(c *gin.Context) {
+	fruitID := c.Param("fruit_id")
+	var fruit models.Fruit
+
+	if err := database.DB.Unscoped().Where("fruit_id = ?", fruitID).First(&fruit).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Fruit not found"})
+		return
+	}
+
+	if fruit.DeletedAt.Valid {
+		c.JSON(http.StatusOK, gin.H{"Fruit already deleted:": fruit.DeletedAt})
+		return
+	}
+
+	if err := database.DB.Delete(&fruit).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete fruit"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Fruit deleted successfully"})
 }
