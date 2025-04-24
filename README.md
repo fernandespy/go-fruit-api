@@ -67,13 +67,13 @@ git clone https://github.com/fernandespy/go-fruit-api.git
 
 Possível erro encontrado aqui é quando rodar o projeto e o receber o erro de **CGO_ENABLED=0* pois a versão do Go pode não ser suportada pelo go-sqlite3
 
-> Solução:
-- primeiro set o CGO para 1 usando 
+Solução:
+- primeiro set o CGO para 1 usando:
 > $env:CGO_ENABLED=1
-- Depois baixe o mingw para auxiliar no compilador C usando 
+- Depois baixe o mingw para auxiliar no compilador C usando:
 > 1: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser irm get.scoop.sh | iex
 > 2: scoop install mingw
-- Ao finalizar a instalação, execute novamente go run ./cmd/api e aplicação deve rodar normalmente
+- Ao finalizar a instalação, execute novamente go run ./cmd/api e aplicação deve rodar normalmente.
 
 > O servidor estará disponível em: http://localhost:8080
 
