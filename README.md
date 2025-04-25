@@ -163,7 +163,7 @@ Resposta exemplo
 ```
 
 *GET /api/fruits/:fruit_id*
-> exemplo: [http:](http://localhost:8080/api/fruits/52)
+> exemplo: http://localhost:8080/api/fruits/52
 
 Retorna a fruta que possui o respectivo ID, mas primeira checa se a fruta teve alguma deleção aplicada pelo campo deleted_at no DB, se não retorna a mesma
 
@@ -198,7 +198,7 @@ Retorno caso a fruta seja deletada:
 }
 ```
 *GET /api/fruits/delete/:fruit_id*
-> exemplo: [http:](http://localhost:8080/api/fruits/delete/52)
+> exemplo: http://localhost:8080/api/fruits/delete/52
 
 Realiza a deleção da fruta especificada direto no DB
 
