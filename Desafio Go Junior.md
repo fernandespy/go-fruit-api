@@ -1,4 +1,4 @@
-# Desafio Go Junior
+# Desafio Go
 
 ## Especificação:
 
@@ -41,11 +41,5 @@ Exemplo de retorno
 ```
 
 
-## Como fazer a entrega
-
-- Criar repositorio publico (Github)
-- Publicar o codigo
-- Colocar README.md com a solução e como rodar a aplicação
-- Enviar link do repositório
 
 
