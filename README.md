@@ -1,6 +1,6 @@
 # Fruit API - Desafio Go Júnior
 
-## API desenvolvida em Go como parte de um desafio técnico para vaga Júnior Backend. A aplicação consulta frutas de uma API pública, armazena localmente e gera relatórios baseados na quantidade de açúcar.
+## API desenvolvida em Go como parte de um desafio técnico. A aplicação consulta frutas de uma API pública, armazena localmente e gera relatórios baseados na quantidade de açúcar.
 
 
 ---
