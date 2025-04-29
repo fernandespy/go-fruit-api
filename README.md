@@ -1,4 +1,4 @@
-# Fruit API - Desafio Go Júnior
+# Fruit API - Desafio Go
 
 ## API desenvolvida em Go como parte de um desafio técnico. A aplicação consulta frutas de uma API pública, armazena localmente e gera relatórios baseados na quantidade de açúcar.
 
